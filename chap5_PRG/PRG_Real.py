@@ -9,6 +9,6 @@ def G(s):
 
 def query_G():
     # Generate a random binary string of length lambda
-    lambda_length = 1024  # Example length of lambda, can be any positive integer
+    lambda_length = 512  # Example length of lambda, can be any positive integer
     s = np.random.randint(0, 2, lambda_length).tolist()  # Generates a list of 0s and 1s
     return G(s)
