@@ -1,5 +1,5 @@
 from prg_rand_1024 import query_random
-from prg_real_sample import query_G
+from prg_real_512 import query_G
 import matplotlib.pyplot as plt
 import seaborn as sns
 
