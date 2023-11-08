@@ -2,8 +2,8 @@ import numpy as np
 
 def query_random():
     # Generate a random binary string of length lambda + l
-    lambda_length = 4  # Example length of lambda, can be any positive integer
-    l_length = 4  # Example length of l, can be any positive integer
+    lambda_length = 2048  # Example length of lambda, can be any positive integer
+    l_length = 2048  # Example length of l, can be any positive integer
     r = np.random.randint(0, 2, lambda_length + l_length).tolist()  # Generates a list of 0s and 1s
     return r
 

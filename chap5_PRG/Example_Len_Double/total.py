@@ -1,12 +1,46 @@
-from prg_rand_8 import query_random
-from prg_real_4 import query_G
+import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# To visually check the output values as a distribution, we'll plot histograms of multiple outputs.
+def G(s):
+    # This function takes 4 bits and returns a list with those 4 bits repeated twice to make 4 bits.
+    return s * 2
+
+def query_G():
+    lambda_length = 2048
+    s = np.random.randint(0, 2, lambda_length).tolist()
+    return G(s)
+
+# def G(s):
+#     """
+#     This function takes a list of bits (s), and returns a new list where each 8-bit unit is doubled.
+#     """
+#      # Double the list
+#     return s * 2
+
+# def query_G():
+#     """
+#     This function generates a random binary list of length lambda (512 bits),
+#     then doubles each 8-bit unit using the G function.
+#     """
+#     lambda_length = 32
+#     s = np.random.randint(0, 2, lambda_length).tolist()
+#     return G(s)
+
+def query_random():
+    # Generate a random binary string of length lambda + l
+    lambda_length = 2048  # Example length of lambda, can be any positive integer
+    l_length = 2048  # Example length of l, can be any positive integer
+    r = np.random.randint(0, 2, lambda_length + l_length).tolist()  # Generates a list of 0s and 1s
+    return r
+
+# res1 = query_G()
+# res2 = query_random() 
+# print(res1)
+# print(res2)
 
 # Define the number of experiments to run
-num_experiments = 10000
+num_experiments = 100000
 
 # Record the outputs
 outputs_G = [query_G() for _ in range(num_experiments)]

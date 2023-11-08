@@ -5,10 +5,10 @@ def G(s):
     return s * 2
 
 def query_G():
-    lambda_length = 4
+    lambda_length = 2048
     s = np.random.randint(0, 2, lambda_length).tolist()
     return G(s)
 
 # Testing the functions
-query_G_result = query_G()
-print(query_G_result)
+# query_G_result = query_G()
+# print(query_G_result)
