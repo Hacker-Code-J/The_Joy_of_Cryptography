@@ -2,6 +2,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+# def G(s):
+#     """
+#     This function takes a list of bits (s), and returns a new list where each 8-bit unit is doubled.
+#     """
+#     # Initialize an empty list to store the result
+#     result = []
+#     # Process each 8-bit segment of the input list
+#     for i in range(0, len(s), 8):
+#         # Extract the 8-bit segment
+#         segment = s[i:i+8]
+#         # Double the segment and add it to the result list
+#         result.extend(segment * 2)
+#     return result
+
 def G(s):
     # This function takes 4 bits and returns a list with those 4 bits repeated twice to make 4 bits.
     return s * 2
