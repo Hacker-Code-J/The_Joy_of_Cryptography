@@ -13,6 +13,7 @@
 \usepackage{lipsum} % Generates filler text
 \usepackage{commath}
 \usepackage{hyperref}
+\usepackage{kotex}
 
 \usepackage{geometry}
 \geometry{a0paper,left=.5in,right=.5in,top=1in,bottom=1.5in,heightrounded}
@@ -180,7 +181,7 @@
 		\huge \textit{Unveiling the Complexity and Elegance of Randomness}\\[1cm]
 		\LARGE\textcolor{SectionColor}{\textbf{Ji Yong-Hyeon \& Kim Dong-Hyeon}} \\[0.5cm]
 		\large Department of Information Security, Cryptology, and Mathematics \\[0.25cm]
-		\normalsize {\texttt{hacker3740@gmail.com, bob@university.cs}} \\
+		\normalsize {\texttt{hacker3740@gmail.com, eastchord0729@gmail.com}} \\
 	\end{minipage}
 	
 	% Add some artistic shapes to the title using TikZ
@@ -197,8 +198,13 @@
 		
 		% Introduction
 		\begin{sectionbox}
-			\section*{\textcolor{MainColor}{I.1 Introduction of PRG}}
-			A deterministic function $G:\binaryfield^\lambda\to\binaryfield^{\lambda+l}$ with $l>0$ is a \textbf{secure pseudorandom generator (PRG)} if $\library_{\mathsf{PRG}-\mathsf{real}}^G\indist\library_{\mathsf{PRG}-\mathsf{rand}}^G$, where: \begin{center}
+			\section*{\LARGE\textcolor{MainColor}{I. Introduction}}\large
+			현대암호학에서 블록암호가 가지는 성질 중 하나는 안전한 의사난수 순열(Pseudorandom Permutation, PRP)로 간주된다는 것이다. PRP의 안전성에 대해 논하기 전에, 먼저 의사난수 생성기(Pseudorandom Generator, PRG)의 안전성이 선행되어야 한다. 안전한 PRG라고 할지라도, 사용 방식에 따라 PRP의 안전성이 보장되지 않을 수 있다. PRP의 안전성에 대해 논하기 전에, PRG와 의사난수 함수(Pseudorandom Function, PRF)의 정의에 대한 이해가 필요하다. 본 고에서는 안전한 PRG, PRF, 그리고 PRP의 정의를 의사코드 형식으로 표현하고, 안전하지 않은 PRG와 PRF의 시각적 이해를 돕는다.
+		\end{sectionbox}
+			
+		\begin{sectionbox}
+			\section*{\LARGE\textcolor{MainColor}{II.1 What is the PRG?}}\large
+			A deterministic function $$G:\binaryfield^\lambda\to\binaryfield^{\lambda+l}$$ with $l>0$ is a \textbf{secure pseudorandom generator (PRG)} if $\library_{\mathsf{PRG}-\mathsf{real}}^G\indist\library_{\mathsf{PRG}-\mathsf{rand}}^G$, where: \begin{center}
 					\begin{tabular}{|c|}
 						\hline
 						\cellcolor{blue!25}$\library_{\mathsf{PRG}-\mathsf{real}}^G$\\
@@ -258,7 +264,7 @@
 			\end{center}
 		\end{sectionbox}
 		\begin{sectionbox}
-			\section*{\textcolor{MainColor}{I.2 How \textcolor{red}{NOT} to Build a PRG}}
+			\section*{\LARGE\textcolor{MainColor}{II.2 How \textcolor{red}{NOT} to Build a PRG}}\large
 			A straightforward approach for the PRG might be to duplicate its input string.
 			\begin{center}
 				\begin{tabular}{|l|}
@@ -276,62 +282,26 @@
 			\textbf{Comparison of Normalized Distributions:}
 			\begin{center}
 				\begin{minipage}{\textwidth}\centering
-					\includegraphics[scale=1]{query_8.png}
+					\includegraphics[scale=1.25]{query_8.png}
 					\captionof*{figure}{$\lambda=4$, \ie, $\binaryfield^8$ with 1,000,000 experiments.}
 				\end{minipage}
 				\begin{minipage}{\textwidth}\centering
-					\includegraphics[scale=1]{query_1024.png}
+					\includegraphics[scale=1.25]{query_1024.png}
 					\captionof*{figure}{$\lambda=1024$, \ie, $\binaryfield^{2048}$ with 100,000 experiments}
 				\end{minipage}
 			\end{center}
-\begin{lstlisting}[style=sage]
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-def G(s):
-	return s * 2
-def query_G():
-	lambda_length = 1024
-	s = np.random.randint(0, 2, lambda_length).tolist()
-	return G(s)
-
-def query_random():
-	lambda_length = 1024
-	l_length = 1024
-	r = np.random.randint(0, 2, lambda_length + l_length).tolist()
-	return r
-
-num_experiments = 100000
-outputs_G = [query_G() for _ in range(num_experiments)]
-outputs_random = [query_random() for _ in range(num_experiments)]
-sums_G = [sum(output) for output in outputs_G]
-sums_random = [sum(output) for output in outputs_random]
-norm_sums_G = [s / 2048 for s in sums_G]
-norm_sums_random = [s / 2048 for s in sums_random]
-plt.figure(figsize=(10, 6))
-sns.kdeplot(norm_sums_G, bw_adjust=0.5, label='Normalized query_G() Distribution', color='blue')
-sns.kdeplot(norm_sums_random, bw_adjust=0.5, label='Normalized query_random() Distribution', color='green')
-
-plt.legend()
-plt.title('Comparison of Normalized Distributions')
-plt.xlabel('Proportion of 1s')
-plt.ylabel('Density')
-plt.show()
-\end{lstlisting}
 		\end{sectionbox}
 		
 		\columnbreak
 		\begin{sectionbox}
-			\section*{\textcolor{MainColor}{II.1 Introduction of PRF}}
-			This research explores groundbreaking concepts...
+			\section*{\LARGE\textcolor{MainColor}{III.1 What is the PRF?}}\large
+			The following encryption scheme is information-theoretically secure.
 			\begin{center}
-				\begin{tikzpicture}[auto]
+				\begin{tikzpicture}[scale=1, auto]
 					% Cloud
 					\node[cloud, draw, cloud puffs=10, cloud puff arc=120, aspect=2.5, inner ysep=.2em] (cloud) {
 						$\begin{array}{r|c}
 							1& \one\one\zero\zero\one\zero\zero\zero\one\zero\cdots\\
-							2& \zero\one\one\zero\zero\zero\zero\one\zero\one\cdots\\
 							\vdots&\vdots\\
 							374283655& \zero\zero\one\one\one\zero\zero\zero\zero\one\cdots\\
 							\vdots&\vdots
@@ -381,13 +351,11 @@ plt.show()
 								\(x_{\indexbit-1}\cdots x_1x_0\) & \(T[x]\) & Binary String Mapping \\
 								000 & \(T[000]\) & \(\one\one\zero\zero\one\zero\zero\zero\one\zero\cdots\) \\
 								001 & \(T[001]\) & \(\zero\one\one\zero\zero\zero\zero\one\zero\one\cdots\) \\
-								010 & \(T[010]\) & \(\zero\zero\one\one\one\zero\zero\zero\zero\one\cdots\) \\
-								\(\vdots\) & \(\vdots\) & \\
-								$x$ & \(T[x]\) &\\
+								\(\vdots\) & \(\vdots\) &\\
 							};
 							
 							% Draw the function arrow and text
-							\foreach \x in {3,...,7} {
+							\foreach \x in {3,...,5} {
 								\draw[->, thick] (array-\x-1) -- (array-\x-2);
 							}
 							
@@ -397,7 +365,6 @@ plt.show()
 					\end{flushright}
 				\end{minipage}
 			\end{center}
-			
 			\begin{center}
 				\begin{minipage}{.25\textwidth}\centering
 					{\renewcommand{\arraystretch}{1.25}\begin{tabular}{|l|}
@@ -420,30 +387,81 @@ plt.show()
 							\node[draw, rectangle, minimum width=3cm, minimum height=3cm, label=above:{\large\bfseries Pseudorandom Function \( F \)}] (func) at (0,0) {};
 							
 							% Draw the input arrow and label
-							\draw[->] (-3,0.5) -- node[above left] {Input (\(x\in\binaryfield^\indexbit\))} (func.west |- {0,0.5});
+							\draw[->] (-3,0.5) -- node[left] {Input (\(x\in\binaryfield^\indexbit\))} (func.west |- {0,0.5});
 							
 							% Draw the seed arrow and label
-							\draw[->] (-3,-0.5) -- node[above left] {Seed ($k\in\binaryfield^\lambda$)} (func.west |- {0,-0.5});
+							\draw[->] (-3,-0.5) -- node[left] {Seed ($k\in\binaryfield^\lambda$)} (func.west |- {0,-0.5});
 							
 							% Draw the output arrow and label
-							\draw[->] (func.east) -- node[above right] {Output (\(\binaryfield^\outbit\))} (3,0);
+							\draw[->] (func.east) -- node[right] {Output (\(\binaryfield^\outbit\))} (3,0);
 							
 						\end{tikzpicture}
 					\end{flushright}
+				\end{minipage}
+			\end{center}
+			\vspace{20pt}
+			A deterministic function \[
+			F:\binaryfield^\lambda\times\binaryfield^{\indexbit}\to\binaryfield^{\outbit}
+			\] is a \textbf{secure pseudo-random function (PRF)} if $\library_{\prf-\real}^F\indist\library_{\mathsf{PRF}-\mathsf{rand}}^F$, where
+			\begin{center}
+				\begin{minipage}{.35\textwidth}\centering
+					\begin{tabular}{|c|}
+						\hline
+						\cellcolor{blue!25}$\library_{\prf-\real}^F$\\
+						\hline
+						\begin{tabular}{l}
+							$k\gets\binaryfield^\lambda$\\
+							\\
+							\underline{\texttt{Lookup} ($x\in\binaryfield^{\indexbit}$):}\\
+							\tab \textbf{return} $F(k,x)$
+						\end{tabular}\\
+						\hline
+					\end{tabular}
+				\end{minipage}
+				\begin{minipage}{.35\textwidth}\centering
+					\begin{tabular}{|c|}
+						\hline
+						\cellcolor{blue!25}$\library_{\mathsf{PRF}-\mathsf{rand}}^F$\\
+						\hline
+						\begin{tabular}{l}
+							$T:=\set{}$\\
+							\\
+							\underline{\texttt{Lookup} ($x\in\binaryfield^{\indexbit}$):}\\
+							\tab \textbf{if} $T[x]$ undefined:\\
+							\tab\tab $T[x]\gets\binaryfield^\outbit$\\
+							\tab \textbf{return} $T[x]$
+						\end{tabular}\\
+						\hline
+					\end{tabular}
 				\end{minipage}
 			\end{center}
 		\end{sectionbox}
 		
 		% Objectives
 		\begin{sectionbox}
-			\section*{Objectives}
-			The primary aim of this research is to...
-			\lipsum[1-3]
+			\section*{\LARGE\textcolor{MainColor}{III.2 How \textcolor{red}{NOT} to Build a PRF}}\large
+			Suppose we have a length-doubling PRG $
+			G:\binaryfield^{\lambda}\to\binaryfield^{2\lambda}
+			$ and try to use it to construct a PRF $F$ as follows:
+			\begin{center}
+				\begin{tabular}{|l|}
+					\hline
+					\underline{$F(k,x)$:}\\
+					\tab return $G(k)\xor x$\\
+					\hline
+				\end{tabular}
+			\end{center}
+			\begin{center}
+				\begin{minipage}{\textwidth}\centering
+					\includegraphics[scale=1]{prf.png}
+					\captionof*{figure}{PRF vs RF}
+				\end{minipage}
+			\end{center}
 		\end{sectionbox}
 		
 		% References
 		\begin{sectionbox}
-			\section*{\textcolor{MainColor}{References}}
+			\section*{\LARGE\textcolor{MainColor}{References}}
 			[1] M. Rosulek, \textit{The Joy of Cryptography}, [Online]. Available: \url{https://joyofcryptography.com}\\
 			\text{[2]} N. P. Smart, \textit{Cryptography Made Simple}. 1st ed. Springer International Publishing, 2016.\\
 			\text{[3]} J. Katz and Y. Lindell, \textit{Introduction to Modern Cryptography}. 2nd ed. Chapman and Hall/CRC, 2014.

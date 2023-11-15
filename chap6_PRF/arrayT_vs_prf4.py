@@ -35,27 +35,30 @@ rf_output1 = np.array([rf(x, output_space) for x in input_space1])
 prf_output2 = np.array([prf(x, key2) for x in input_space1])
 rf_output2 = np.array([rf(x, output_space) for x in input_space1])
 
-# Visualization
+# Create a figure with specified figure size
 plt.figure(figsize=(14, 7))
 
+# Subplot 1 for PRF vs RF comparison in the first scenario
 plt.subplot(1, 2, 1)
-plt.plot(input_space1, prf_output1, 'o', label='PRF')
-plt.plot(input_space1, rf_output1, 'x', label='RF')
-plt.title('PRF vs. RF (Small Input/Output Space)')
-plt.xlabel('Input Space X')
-plt.ylabel('Output Space Y')
+plt.plot(input_space1, prf_output1, 'o', color='mediumvioletred', label='PRF', markersize=4)
+plt.plot(input_space1, rf_output1, 'x', color='dodgerblue', label='RF', markersize=4)
+plt.title('PRF vs. RF (kEY 1)', fontsize=14)
+plt.xlabel('Index Space X', fontsize=12)
+plt.ylabel('Output Space Y', fontsize=12)
 plt.legend()
 plt.grid(True)
 
+# Subplot 2 for PRF vs RF comparison in the second scenario
 plt.subplot(1, 2, 2)
-plt.plot(input_space1, prf_output2, 'o', label='PRF')
-plt.plot(input_space1, rf_output2, 'x', label='RF')
-plt.title('PRF vs. RF (Small Input/Output Space)')
-plt.xlabel('Input Space X')
-plt.ylabel('Output Space Y')
+plt.plot(input_space1, prf_output2, 'o', color='mediumvioletred', label='PRF', markersize=4)
+plt.plot(input_space1, rf_output2, 'x', color='dodgerblue', label='RF', markersize=4)
+plt.title('PRF vs. RF (KEY 2)', fontsize=14)
+plt.xlabel('Index Space X', fontsize=12)
+plt.ylabel('Output Space Y', fontsize=12)
 plt.legend()
 plt.grid(True)
 
+# Adjust layout to prevent overlap and show the plot
 plt.tight_layout()
 plt.show()
 
