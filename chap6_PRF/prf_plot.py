@@ -32,7 +32,7 @@ rf_output = np.array([rf_instance(x) for x in input_space])
 plt.figure(figsize=(7, 7))
 
 plt.plot(input_space, rf_output, 'x', color='dodgerblue', label='RF', markersize=4)
-plt.plot(input_space, prf_output, 'o', color='mediumvioletred', label='RF', markersize=4)
+plt.plot(input_space, prf_output, 'o', color='mediumvioletred', label='PRF', markersize=4)
 plt.title(f'PRF vs. RF (KEY: {key})', fontsize=14)
 # plt.title(f'Random Table T', fontsize=14)
 plt.xlabel('Index Space X', fontsize=12)
