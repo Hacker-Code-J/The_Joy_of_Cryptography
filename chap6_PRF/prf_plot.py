@@ -35,7 +35,7 @@ plt.plot(input_space, rf_output, 'x', color='dodgerblue', label='RF', markersize
 plt.plot(input_space, prf_output, 'o', color='mediumvioletred', label='PRF', markersize=4)
 plt.title(f'PRF vs. RF (KEY: {key})', fontsize=14)
 # plt.title(f'Random Table T', fontsize=14)
-plt.xlabel('Index Space X', fontsize=12)
+plt.xlabel('Input Space X', fontsize=12)
 plt.ylabel('Output Space Y', fontsize=12)
 plt.legend()
 plt.grid(True)
