@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Increasing the number of samples to 1000
-num_samples = 1000
+num_samples = 100
 input_space = range(num_samples)
 key_space = range(1, 2**4)  # Two example keys for PRF
 output_space = range(2**16)  # Let's assume the output space is 16-bit values
